@@ -26,6 +26,6 @@ if(isset($_POST['ok'])) {
         "mdp" => $mdp,
         "email" => $email
     ));
-    header("Location: index.php");
+    header("Location: index.html");
 }
 ?>
