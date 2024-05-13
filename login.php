@@ -1,16 +1,25 @@
 <?php
 session_start();
 
+// Vérifier si l'utilisateur est déjà connecté, auquel cas rediriger vers index.php
+if(isset($_SESSION['username'])) {
+    header("Location: index.php");
+    exit;
+}
+
 // Vérifier si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Vérifier les champs du formulaire
+    // Vérifier les identifiants de connexion
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Vérifier si l'utilisateur et le mot de passe sont corrects (ceci est une vérification très basique, pour un vrai projet, utilisez un système d'authentification sécurisé comme bcrypt)
+    // Vérifier les identifiants de connexion (exemple basique, à remplacer par un système sécurisé)
     if ($username === 'utilisateur' && $password === 'motdepasse') {
         // Stocker le nom d'utilisateur dans une session
         $_SESSION['username'] = $username;
+        // Rediriger vers index.php
+        header("Location: index.php");
+        exit;
     } else {
         // Afficher un message d'erreur si les informations de connexion sont incorrectes
         $message = "Nom d'utilisateur ou mot de passe incorrect.";
@@ -34,14 +43,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php if(isset($message)): ?>
         <p><?php echo $message; ?></p>
     <?php endif; ?>
-
-    <!-- Afficher "Bonjour, username" si l'utilisateur est connecté -->
-    <?php if(isset($_SESSION['username'])): ?>
-        <p>Bonjour, <?php echo $_SESSION['username']; ?></p>
-    <?php endif; ?>
     
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-        <label for="username">Nom d'utilisateur :</label><br>
+        <label for="username"> Nom d'utilisateur :</label><br>
         <input type="text" id="username" name="username" required><br>
         <label for="password">Mot de passe :</label><br>
         <input type="password" id="password" name="password" required><br><br>
@@ -51,3 +55,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 </body>
 </html>
+
