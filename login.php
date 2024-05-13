@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($rep['id'] !== false) {
             //echo "Vous êtes connecté !";
-            header("Location: success.php");
+            header("Location: index.php");
             exit;
         } else {
             $error_msg = "Email ou mot de passe incorrect.";
