@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // Vérifier si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Vérifier les champs du formulaire
@@ -7,9 +9,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Vérifier si l'utilisateur et le mot de passe sont corrects (ceci est une vérification très basique, pour un vrai projet, utilisez un système d'authentification sécurisé comme bcrypt)
     if ($username === 'utilisateur' && $password === 'motdepasse') {
-        // Redirection vers la page sécurisée
-        header("Location: page_securisee.php");
-        exit();
+        // Stocker le nom d'utilisateur dans une session
+        $_SESSION['username'] = $username;
     } else {
         // Afficher un message d'erreur si les informations de connexion sont incorrectes
         $message = "Nom d'utilisateur ou mot de passe incorrect.";
@@ -32,6 +33,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- Afficher le message d'erreur s'il y en a un -->
     <?php if(isset($message)): ?>
         <p><?php echo $message; ?></p>
+    <?php endif; ?>
+
+    <!-- Afficher "Bonjour, username" si l'utilisateur est connecté -->
+    <?php if(isset($_SESSION['username'])): ?>
+        <p>Bonjour, <?php echo $_SESSION['username']; ?></p>
     <?php endif; ?>
     
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
