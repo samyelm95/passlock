@@ -52,6 +52,10 @@
 
   <!-- Bouton pour copier le mot de passe généré -->
   <button id="generateButton2" type="button" onclick="copie()">Copier</button>
+
+  <!-- Boutons Login et Signin -->
+  <button onclick="window.location.href='login.php';">Login</button>
+  <button onclick="window.location.href='sigin.php';">Signin</button>
 </div>
 
 <!-- Inclusion du script JavaScript -->
