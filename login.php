@@ -1,4 +1,6 @@
 <?php
+session_start(); // Démarrez la session
+
 $servername = "localhost";
 $username = "root";
 $password = "root";
@@ -23,8 +25,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ));
         $rep = $req->fetch();
 
-        if ($rep['id'] !== false) {
-            //echo "Vous êtes connecté !";
+        if ($rep !== false) {
+            // L'authentification est réussie, stockez le pseudo dans la session
+            $_SESSION['pseudo'] = $rep['pseudo'];
+            // Redirigez l'utilisateur vers la page principale
             header("Location: index.php");
             exit;
         } else {
