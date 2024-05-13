@@ -9,6 +9,9 @@
 </head>
 <body>
 
+  <!-- Afficher le message de bienvenue avec le pseudo -->
+<h2>Bonjour, <?php echo $pseudo; ?></h2>
+
 <!-- Conteneur principal du générateur -->
 <div id="generateur">
 
